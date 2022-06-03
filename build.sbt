@@ -11,7 +11,7 @@ ThisBuild / scalaVersion := Scala213
 lazy val root = project.in(file(".")).aggregate(scalatags).enablePlugins(NoPublishPlugin)
 
 val http4sVersion = "0.23.12"
-val scalatagsVersion = "0.10.0"
+val scalatagsVersion = "0.11.1"
 val munitVersion = "0.7.29"
 val munitCatsEffectVersion = "1.0.7"
 
