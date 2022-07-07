@@ -20,10 +20,16 @@ package scalatags
 import _root_.scalatags.Text
 import cats.data.NonEmptyList
 import cats.effect.IO
+import cats.syntax.all._
+import munit.CatsEffectSuite
 import org.http4s.Status.Ok
 import org.http4s.headers.`Content-Type`
 
-class ScalatagsSuite extends Http4sSuite {
+class ScalatagsSuite extends CatsEffectSuite {
+  implicit class ParseResultSyntax[A](self: ParseResult[A]) {
+    def yolo: A = self.valueOr(e => sys.error(e.toString))
+  }
+
   private val testCharsets = NonEmptyList.of(
     Charset.`ISO-8859-1`,
     Charset.fromString("Windows-1251").yolo,
