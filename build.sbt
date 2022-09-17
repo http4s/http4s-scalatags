@@ -7,14 +7,15 @@ val Scala213 = "2.13.8"
 ThisBuild / crossScalaVersions := Seq("2.12.17", Scala213, "3.1.3")
 ThisBuild / scalaVersion := Scala213
 
-lazy val root = project.in(file(".")).aggregate(scalatags).enablePlugins(NoPublishPlugin)
+lazy val root = tlCrossRootProject.aggregate(scalatags)
 
 val http4sVersion = "0.23.16"
 val scalatagsVersion = "0.11.1"
-val munitVersion = "0.7.29"
-val munitCatsEffectVersion = "1.0.7"
+val munitVersion = "1.0.0-M6"
+val munitCatsEffectVersion = "2.0.0-M3"
 
-lazy val scalatags = project
+lazy val scalatags = crossProject(JVMPlatform, JSPlatform, NativePlatform)
+  .crossType(CrossType.Pure)
   .in(file("scalatags"))
   .settings(
     name := "http4s-scalatags",
@@ -24,7 +25,10 @@ lazy val scalatags = project
       "org.http4s" %%% "http4s-core" % http4sVersion,
       "com.lihaoyi" %%% "scalatags" % scalatagsVersion,
       "org.scalameta" %%% "munit-scalacheck" % munitVersion % Test,
-      "org.typelevel" %%% "munit-cats-effect-3" % munitCatsEffectVersion % Test,
+      "org.typelevel" %%% "munit-cats-effect" % munitCatsEffectVersion % Test,
       "org.http4s" %%% "http4s-laws" % http4sVersion % Test,
     ),
+  )
+  .platformsSettings(JSPlatform, NativePlatform)(
+    tlVersionIntroduced := List("2.12", "2.13", "3").map(_ -> "0.24.1").toMap
   )
