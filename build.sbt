@@ -29,9 +29,6 @@ lazy val scalatags = crossProject(JVMPlatform, JSPlatform, NativePlatform)
       "org.http4s" %%% "http4s-laws" % http4sVersion % Test,
     ),
   )
-  .platformsSettings(JSPlatform, NativePlatform)(
-    tlVersionIntroduced := List("2.12", "2.13", "3").map(_ -> "0.24.1").toMap
-  )
   .nativeSettings(
     unusedCompileDependenciesTest := {}
   )
