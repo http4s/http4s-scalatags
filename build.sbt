@@ -24,7 +24,7 @@ lazy val scalatags = project
       "org.http4s" %%% "http4s-core" % http4sVersion,
       "com.lihaoyi" %%% "scalatags" % scalatagsVersion,
       "org.scalameta" %%% "munit-scalacheck" % munitVersion % Test,
-      "org.typelevel" %%% "munit-cats-effect-3" % munitCatsEffectVersion % Test,
+      "org.typelevel" %%% "munit-cats-effect" % munitCatsEffectVersion % Test,
       "org.http4s" %%% "http4s-laws" % http4sVersion % Test,
     ),
   )
