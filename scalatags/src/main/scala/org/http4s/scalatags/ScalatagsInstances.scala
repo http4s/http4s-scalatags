@@ -18,6 +18,7 @@ package org.http4s
 package scalatags
 
 import _root_.scalatags.generic.Frag
+import _root_.scalatags.Text.all.doctype
 import org.http4s.Charset.`UTF-8`
 import org.http4s.headers.`Content-Type`
 
@@ -28,6 +29,19 @@ trait ScalatagsInstances {
     contentEncoder(MediaType.text.html)
 
   private def contentEncoder[F[_], C <: Frag[_, String]](
+      mediaType: MediaType
+  )(implicit charset: Charset): EntityEncoder[F, C] =
+    EntityEncoder
+      .stringEncoder[F]
+      .contramap[C](content => content.render)
+      .withContentType(`Content-Type`(mediaType, charset))
+
+  implicit def doctypeEncoder[F[_], C <: doctype](implicit
+      charset: Charset = `UTF-8`
+  ): EntityEncoder[F, C] =
+    contentEncoder2(MediaType.text.html)
+
+  private def contentEncoder2[F[_], C <: doctype](
       mediaType: MediaType
   )(implicit charset: Charset): EntityEncoder[F, C] =
     EntityEncoder
