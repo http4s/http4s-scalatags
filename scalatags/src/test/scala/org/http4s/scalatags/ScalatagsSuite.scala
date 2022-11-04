@@ -92,6 +92,10 @@ class ScalatagsSuite extends CatsEffectSuite {
       .text[IO]
       .decode(resp, strict = false)
       .value
-      .assertEquals(Right("<!DOCTYPE html><html lang=\"en\"><head><title>http4s-scalatags</title></head><body><div><p>this is my testBody</p></div></body></html>"))
+      .assertEquals(
+        Right(
+          "<!DOCTYPE html><html lang=\"en\"><head><title>http4s-scalatags</title></head><body><div><p>this is my testBody</p></div></body></html>"
+        )
+      )
   }
 }
