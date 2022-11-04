@@ -36,7 +36,7 @@ trait ScalatagsInstances {
       .contramap[C](content => content.render)
       .withContentType(`Content-Type`(mediaType, charset))
 
-  implicit def doctypeEncoder[F[_](implicit
+  implicit def doctypeEncoder[F[_]](implicit
       charset: Charset = `UTF-8`
   ): EntityEncoder[F, doctype] =
     doctypeContentEncoder(MediaType.text.html)
