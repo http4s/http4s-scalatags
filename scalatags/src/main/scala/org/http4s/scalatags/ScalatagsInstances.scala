@@ -17,8 +17,8 @@
 package org.http4s
 package scalatags
 
-import _root_.scalatags.generic.Frag
 import _root_.scalatags.Text.all.doctype
+import _root_.scalatags.generic.Frag
 import org.http4s.Charset.`UTF-8`
 import org.http4s.headers.`Content-Type`
 
