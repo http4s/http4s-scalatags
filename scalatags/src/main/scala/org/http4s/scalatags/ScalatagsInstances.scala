@@ -36,16 +36,16 @@ trait ScalatagsInstances {
       .contramap[C](content => content.render)
       .withContentType(`Content-Type`(mediaType, charset))
 
-  implicit def doctypeEncoder[F[_], C <: doctype](implicit
+  implicit def doctypeEncoder[F[_](implicit
       charset: Charset = `UTF-8`
-  ): EntityEncoder[F, C] =
-    contentEncoder2(MediaType.text.html)
+  ): EntityEncoder[F, doctype] =
+    doctypeContentEncoder(MediaType.text.html)
 
-  private def contentEncoder2[F[_], C <: doctype](
+  private def doctypeContentEncoder[F[_]](
       mediaType: MediaType
-  )(implicit charset: Charset): EntityEncoder[F, C] =
+  )(implicit charset: Charset): EntityEncoder[F, doctype] =
     EntityEncoder
       .stringEncoder[F]
-      .contramap[C](content => content.render)
+      .contramap[doctype](content => content.render)
       .withContentType(`Content-Type`(mediaType, charset))
 }
