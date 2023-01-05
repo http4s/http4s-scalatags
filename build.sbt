@@ -1,17 +1,16 @@
-ThisBuild / tlBaseVersion := "0.25"
+ThisBuild / tlBaseVersion := "1.0"
 ThisBuild / developers := List(
   tlGitHubDev("rossabaker", "Ross A. Baker")
 )
 
 val Scala213 = "2.13.10"
-ThisBuild / crossScalaVersions := Seq("2.12.17", Scala213, "3.2.1")
-ThisBuild / scalaVersion := Scala213
+ThisBuild / crossScalaVersions := Seq(Scala213, "3.2.1")
 
 lazy val root = tlCrossRootProject.aggregate(scalatags)
 
-val http4sVersion = "0.23.17"
+val http4sVersion = "1.0.0-M38"
 val scalatagsVersion = "0.12.0"
-val munitVersion = "1.0.0-M6"
+val munitVersion = "1.0.0-M7"
 val munitCatsEffectVersion = "2.0.0-M3"
 
 lazy val scalatags = crossProject(JVMPlatform, JSPlatform, NativePlatform)
