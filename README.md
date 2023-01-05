@@ -12,9 +12,10 @@ libraryDependencies ++= Seq(
 
 ## Compatibility
 
-| http4s-scalatags | http4s-core | scalatags | Scala 2.12 | Scala 2.13 | Scala 3 | Status |
-|:-----------------|:------------|:----------|------------|------------|---------|:-------|
-| 0.23.x           | 0.23.x      | 0.10.x    | ✅         | ✅         | ❌      | EOL    |
-| 0.24.x           | 0.23.x      | 0.11.x    | ✅         | ✅         | ✅      | Stable |
+| http4s-scalatags | http4s-core | scalatags | Scala 2.12 | Scala 2.13 | Scala 3 | Scala.js | Scala Native | Status |
+|:-----------------|:------------|:----------|------------|------------|---------|----------|--------------|:-------|
+| 0.23.x           | 0.23.x      | 0.10.x    | ✅         | ✅         | ❌      | ❌       | ❌           | EOL    |
+| 0.24.x           | 0.23.x      | 0.11.x    | ✅         | ✅         | ✅      | ❌       | ❌           | EOL    |
+| 0.25.x           | 0.23.x      | 0.12.x    | ✅         | ✅         | ✅      | ✅       | ✅           | Stable |
 
 [scalatags]: https://com-lihaoyi.github.io/scalatags/

@@ -20,34 +20,55 @@ package scalatags
 import _root_.scalatags.Text
 import cats.data.NonEmptyList
 import cats.effect.IO
-import cats.syntax.all._
 import munit.CatsEffectSuite
 import org.http4s.Status.Ok
 import org.http4s.headers.`Content-Type`
 
 class ScalatagsSuite extends CatsEffectSuite {
-  implicit class ParseResultSyntax[A](self: ParseResult[A]) {
-    def yolo: A = self.valueOr(e => sys.error(e.toString))
-  }
-
-  private val testCharsets = NonEmptyList.of(
+  private val testCharsets = NonEmptyList(
     Charset.`ISO-8859-1`,
-    Charset.fromString("Windows-1251").yolo,
-    Charset.fromString("GB2312").yolo,
-    Charset.fromString("Shift-JIS").yolo,
-    Charset.fromString("Windows-1252").yolo,
+    List(
+      Charset.fromString("Windows-1251").toOption,
+      Charset.fromString("GB2312").toOption,
+      Charset.fromString("Shift-JIS").toOption,
+      Charset.fromString("Windows-1252").toOption,
+    ).flatten,
   )
 
   private def testBody() = {
     import Text.all
+
     all.div()(
       all.p()(all.raw("this is my testBody"))
+    )
+  }
+
+  private def testDoctypeBody() = {
+    import Text.all._
+    import Text.tags2.title
+    import Text.all.doctype
+
+    doctype("html")(
+      html(
+        lang := "en",
+        head(
+          title("http4s-scalatags")
+        ),
+        body(this.testBody()),
+      )
     )
   }
 
   test("TypedTag encoder should return Content-Type text/html with proper charset") {
     testCharsets.map { implicit cs =>
       val headers = EntityEncoder[IO, Text.TypedTag[String]].headers
+      assertEquals(headers.get[`Content-Type`], Some(`Content-Type`(MediaType.text.html, Some(cs))))
+    }
+  }
+
+  test("Doctype encoder should return Content-Type text/html with proper charset") {
+    testCharsets.map { implicit cs =>
+      val headers = EntityEncoder[IO, Text.all.doctype].headers
       assertEquals(headers.get[`Content-Type`], Some(`Content-Type`(MediaType.text.html, Some(cs))))
     }
   }
@@ -62,4 +83,19 @@ class ScalatagsSuite extends CatsEffectSuite {
       .assertEquals(Right("<div><p>this is my testBody</p></div>"))
   }
 
+  test("Doctype encoder should render the body") {
+    implicit val cs: Charset = Charset.`UTF-8`
+
+    val resp = Response[IO](Ok).withEntity(testDoctypeBody())
+
+    EntityDecoder
+      .text[IO]
+      .decode(resp, strict = false)
+      .value
+      .assertEquals(
+        Right(
+          "<!DOCTYPE html><html lang=\"en\"><head><title>http4s-scalatags</title></head><body><div><p>this is my testBody</p></div></body></html>"
+        )
+      )
+  }
 }
