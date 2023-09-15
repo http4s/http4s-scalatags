@@ -10,7 +10,7 @@ lazy val root = tlCrossRootProject.aggregate(scalatags)
 
 val http4sVersion = "1.0.0-M39"
 val scalatagsVersion = "0.12.0"
-val munitVersion = "1.0.0-M7"
+val munitVersion = "1.0.0-M10"
 val munitCatsEffectVersion = "2.0.0-M3"
 
 lazy val scalatags = crossProject(JVMPlatform, JSPlatform, NativePlatform)
