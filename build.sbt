@@ -3,9 +3,10 @@ ThisBuild / developers := List(
   tlGitHubDev("rossabaker", "Ross A. Baker")
 )
 
-val Scala213 = "2.13.11"
+val Scala213 = "2.13.14"
 ThisBuild / crossScalaVersions := Seq("2.12.19", Scala213, "3.3.3")
 ThisBuild / scalaVersion := Scala213
+ThisBuild / startYear := Some(2018)
 
 lazy val root = tlCrossRootProject.aggregate(scalatags)
 
@@ -20,7 +21,6 @@ lazy val scalatags = crossProject(JVMPlatform, JSPlatform, NativePlatform)
   .settings(
     name := "http4s-scalatags",
     description := "Scalatags template support for http4s",
-    startYear := Some(2018),
     libraryDependencies ++= Seq(
       "org.http4s" %%% "http4s-core" % http4sVersion,
       "com.lihaoyi" %%% "scalatags" % scalatagsVersion,
