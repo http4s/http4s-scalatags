@@ -4,7 +4,7 @@ ThisBuild / developers := List(
 )
 
 val Scala213 = "2.13.14"
-ThisBuild / crossScalaVersions := Seq("2.12.18", Scala213, "3.3.3")
+ThisBuild / crossScalaVersions := Seq("2.12.19", Scala213, "3.3.3")
 ThisBuild / scalaVersion := Scala213
 
 lazy val root = tlCrossRootProject.aggregate(scalatags)
