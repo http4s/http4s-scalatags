@@ -30,5 +30,7 @@ lazy val scalatags = crossProject(JVMPlatform, JSPlatform, NativePlatform)
     ),
   )
   .nativeSettings(
-    unusedCompileDependenciesTest := {}
+    unusedCompileDependenciesTest := {},
+    tlVersionIntroduced := List("2.12", "2.13", "3").map(_ -> "0.25.2").toMap
+
   )
