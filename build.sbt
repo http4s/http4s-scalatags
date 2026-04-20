@@ -10,10 +10,10 @@ ThisBuild / startYear := Some(2018)
 
 lazy val root = tlCrossRootProject.aggregate(scalatags)
 
-val http4sVersion = "0.23.33"
-val scalatagsVersion = "0.12.0"
-val munitVersion = "1.0.0-M7"
-val munitCatsEffectVersion = "2.0.0-M3"
+val http4sVersion = "0.23.34"
+val scalatagsVersion = "0.13.1"
+val munitVersion = "1.3.0"
+val munitCatsEffectVersion = "2.2.0"
 
 lazy val scalatags = crossProject(JVMPlatform, JSPlatform, NativePlatform)
   .crossType(CrossType.Pure)
@@ -30,5 +30,6 @@ lazy val scalatags = crossProject(JVMPlatform, JSPlatform, NativePlatform)
     ),
   )
   .nativeSettings(
-    unusedCompileDependenciesTest := {}
+    unusedCompileDependenciesTest := {},
+    tlVersionIntroduced := List("2.12", "2.13", "3").map(_ -> "0.25.3").toMap,
   )
