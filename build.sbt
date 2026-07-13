@@ -10,7 +10,7 @@ ThisBuild / startYear := Some(2018)
 
 lazy val root = tlCrossRootProject.aggregate(scalatags)
 
-val http4sVersion = "0.23.34"
+val http4sVersion = "0.23.36"
 val scalatagsVersion = "0.13.1"
 val munitVersion = "1.3.0"
 val munitCatsEffectVersion = "2.2.0"
