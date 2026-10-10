@@ -12,31 +12,26 @@ ThisBuild / scalaVersion := Scala213
 ThisBuild / startYear := Some(2018)
 
 ThisBuild / githubWorkflowJavaVersions := Seq(
-  JavaSpec.temurin("8"),
-  JavaSpec.temurin("11"),
-  JavaSpec.temurin("17"),
-  JavaSpec.temurin("21"),
+    JavaSpec.temurin("17"),
+    JavaSpec.temurin("8"),
+    JavaSpec.temurin("11"),
+    JavaSpec.temurin("21"),
 )
 
 ThisBuild / githubWorkflowBuildMatrixExclusions := Seq(
-  MatrixExclude(Map("scala" -> "2.12", "java" -> "temurin@11")),
-  MatrixExclude(Map("scala" -> "2.12", "java" -> "temurin@17")),
-  MatrixExclude(Map("scala" -> "2.12", "java" -> "temurin@21")),
-  MatrixExclude(Map("scala" -> "2.13", "java" -> "temurin@21")),
-  MatrixExclude(
-    Map("scala" -> "2.13", "project" -> "rootJS", "java" -> "temurin@11")
-  ),
-  MatrixExclude(
-    Map("scala" -> "2.13", "project" -> "rootNative", "java" -> "temurin@11")
-  ),
-  MatrixExclude(
-    Map("scala" -> "2.13", "project" -> "rootJS", "java" -> "temurin@17")
-  ),
-  MatrixExclude(
-    Map("scala" -> "2.13", "project" -> "rootNative", "java" -> "temurin@17")
-  ),
-  MatrixExclude(Map("scala" -> "3", "java" -> "temurin@8")),
-  MatrixExclude(Map("scala" -> "3", "java" -> "temurin@11")),
+    MatrixExclude(Map("scala" -> "3", "java" -> "temurin@8")),
+    MatrixExclude(Map("scala" -> "3", "java" -> "temurin@11")),
+
+    MatrixExclude(Map("scala" -> "2.12", "java" -> "temurin@11")),
+    MatrixExclude(Map("scala" -> "2.12", "java" -> "temurin@21")),
+
+    MatrixExclude(Map("scala" -> "2.13", "java" -> "temurin@21")),
+    MatrixExclude(
+        Map("scala" -> "2.13", "project" -> "rootJS", "java" -> "temurin@11")
+    ),
+    MatrixExclude(
+        Map("scala" -> "2.13", "project" -> "rootNative", "java" -> "temurin@11")
+    ),
 )
 
 lazy val root = tlCrossRootProject.aggregate(scalatags)
