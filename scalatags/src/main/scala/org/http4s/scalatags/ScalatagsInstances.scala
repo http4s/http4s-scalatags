@@ -23,12 +23,12 @@ import org.http4s.Charset.`UTF-8`
 import org.http4s.headers.`Content-Type`
 
 trait ScalatagsInstances {
-  implicit def scalatagsEncoder[F[_], C <: Frag[_, String]](implicit
+  implicit def scalatagsEncoder[F[_], C <: Frag[?, String]](implicit
       charset: Charset = `UTF-8`
   ): EntityEncoder[F, C] =
     contentEncoder(MediaType.text.html)
 
-  private def contentEncoder[F[_], C <: Frag[_, String]](
+  private def contentEncoder[F[_], C <: Frag[?, String]](
       mediaType: MediaType
   )(implicit charset: Charset): EntityEncoder[F, C] =
     EntityEncoder
