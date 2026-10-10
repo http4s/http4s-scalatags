@@ -3,8 +3,11 @@ ThisBuild / developers := List(
   tlGitHubDev("rossabaker", "Ross A. Baker")
 )
 
+val Scala212 = "2.12.21"
 val Scala213 = "2.13.18"
-ThisBuild / crossScalaVersions := Seq("2.12.21", Scala213, "3.3.7")
+val Scala3 = "3.9.0"
+
+ThisBuild / crossScalaVersions := Seq(Scala212, Scala213, Scala3)
 ThisBuild / scalaVersion := Scala213
 ThisBuild / startYear := Some(2018)
 
