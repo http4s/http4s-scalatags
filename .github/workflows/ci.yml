@@ -32,6 +32,9 @@ jobs:
         scala: [2.12, 2.13, 3]
         java: [temurin@8, temurin@11, temurin@17]
         project: [rootJS, rootJVM, rootNative]
+        include:
+          - scala: 3
+            java: temurin@21
         exclude:
           - scala: 2.12
             java: temurin@11
@@ -49,6 +52,8 @@ jobs:
             java: temurin@11
           - project: rootNative
             java: temurin@17
+          - scala: 3
+            java: temurin@8
     runs-on: ${{ matrix.os }}
     timeout-minutes: 60
     steps:
@@ -261,36 +266,6 @@ jobs:
           name: target-${{ matrix.os }}-${{ matrix.java }}-2.13-rootNative
 
       - name: Inflate target directories (2.13, rootNative)
-        run: |
-          tar xf targets.tar
-          rm targets.tar
-
-      - name: Download target directories (3, rootJS)
-        uses: actions/download-artifact@v6
-        with:
-          name: target-${{ matrix.os }}-${{ matrix.java }}-3-rootJS
-
-      - name: Inflate target directories (3, rootJS)
-        run: |
-          tar xf targets.tar
-          rm targets.tar
-
-      - name: Download target directories (3, rootJVM)
-        uses: actions/download-artifact@v6
-        with:
-          name: target-${{ matrix.os }}-${{ matrix.java }}-3-rootJVM
-
-      - name: Inflate target directories (3, rootJVM)
-        run: |
-          tar xf targets.tar
-          rm targets.tar
-
-      - name: Download target directories (3, rootNative)
-        uses: actions/download-artifact@v6
-        with:
-          name: target-${{ matrix.os }}-${{ matrix.java }}-3-rootNative
-
-      - name: Inflate target directories (3, rootNative)
         run: |
           tar xf targets.tar
           rm targets.tar
