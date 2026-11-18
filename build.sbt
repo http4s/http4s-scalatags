@@ -36,7 +36,7 @@ ThisBuild / githubWorkflowBuildMatrixExclusions := Seq(
 
 lazy val root = tlCrossRootProject.aggregate(scalatags)
 
-val http4sVersion = "0.23.38"
+val http4sVersion = "0.23.39"
 val scalatagsVersion = "0.13.1"
 val munitVersion = "1.3.1"
 val munitCatsEffectVersion = "2.2.1"
